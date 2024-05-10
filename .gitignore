@@ -2,3 +2,10 @@
 .DS_Store
 backup
 chroma
+results
+chroma_*
+data
+.idea
+credentials.json
+token.json
+CV*
