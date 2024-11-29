@@ -6,14 +6,16 @@ pkgs.mkShell {
   nativeBuildInputs = with pkgs; [
     git        # For version control (if needed)
     python311Full   
-    python311Packages.pip
-    python311Packages.pypdf
-    python311Packages.langchain
-    python311Packages.pytest
     python311Packages.boto3
-    python311Packages.chromadb  # unstable channel
-    python311Packages.venvShellHook
+    python311Packages.langchain
+    python311Packages.langchain-community
+    python311Packages.langchain-chroma
+    python311Packages.pip
     python311Packages.pipx
+    python311Packages.pypdf
+    python311Packages.pytest
+    # python311Packages.chromadb  # unstable channel
+    python311Packages.venvShellHook
     poetry
     vim
   ];

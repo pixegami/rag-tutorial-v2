@@ -1,0 +1,23 @@
+layout {
+  
+    pane split_direction="vertical" {
+      pane {
+        focus true
+        name "general"
+      }
+      pane split_direction="horizontal" {
+
+        pane {
+          name "Ollama"
+          command "ollama"
+          args "serve"
+        }
+        pane {
+          command "ollama"
+          args "run" "gemma2:2b"
+          start_suspended true
+        }
+      }
+    }
+}
+

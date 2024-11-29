@@ -1,0 +1,8 @@
+[[panes]]
+direction = "vertical"
+
+[[panes.panes]]
+command = "sleep 5 && ollama run gemma2:2b"
+
+[[panes.panes]]
+command = "ollama serve"

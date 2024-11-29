@@ -1,27 +1,45 @@
-# rag-tutorial-v2
+# Ollama Development Environment
+
+## PDF Data Extraction
+
+1. Example PDF files available in the `data` folder
 
 
-## PDF Data
+## OLLAMA Environment
 
-1. Download example PDF file in a subfolder `data`
+Start an interactive shell using Ollama + GEMMA.
+Environment set up is automated and provides a working environment.
 
+```bash
+nix-shell --pure
+```
 
-## Ollma
+## Ollama Shell
+
+Manual environment, require Ollama to be running in the background.
 
 1. Run the Ollama serve
-2. Pull the `nomic-embed-text` model
+```bash
+ollama serve
+```
 
-## Populate the database
+2. Pull the `nomic-embed-text` model (or one of your choice)
+
+```bash
+ollama pull [model]
+```
+
+### Populate the database
 
 1. python populate_database.py
 
 
-## Generate Embeddings
+### Generate Embeddings
 
 1. python get_embedding_function.py
 
 
-## Run Query
+### Run Query
 
 1. Update query_data.py to use the required model
 2. Run the command:
