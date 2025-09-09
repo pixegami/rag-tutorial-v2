@@ -1,3 +1,33 @@
+def ingest_file(file_path):
+    """Ingest a single PDF file into the vector database."""
+    from langchain_community.document_loaders import PyPDFLoader
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+    from langchain.vectorstores.chroma import Chroma
+    from get_embedding_function import get_embedding_function
+
+    loader = PyPDFLoader(file_path)
+    documents = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=800,
+        chunk_overlap=80,
+        length_function=len,
+        is_separator_regex=False,
+    )
+    chunks = text_splitter.split_documents(documents)
+    db = Chroma(
+        persist_directory=CHROMA_PATH, embedding_function=get_embedding_function()
+    )
+    chunks_with_ids = calculate_chunk_ids(chunks)
+    existing_items = db.get(include=[])
+    existing_ids = set(existing_items["ids"])
+    new_chunks = [chunk for chunk in chunks_with_ids if chunk.metadata["id"] not in existing_ids]
+    if new_chunks:
+        new_chunk_ids = [chunk.metadata["id"] for chunk in new_chunks]
+        db.add_documents(new_chunks, ids=new_chunk_ids)
+        db.persist()
+        return f"Added {len(new_chunks)} new chunks from {os.path.basename(file_path)}"
+    else:
+        return f"No new content to add from {os.path.basename(file_path)}"
 import argparse
 import os
 import shutil

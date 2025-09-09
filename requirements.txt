@@ -1,3 +1,5 @@
+# Streamlit for web UI
+streamlit
 pypdf
 langchain
 chromadb # Vector storage
